@@ -1,0 +1,169 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: dvorak_double_pinyin
+  name: dvorak双拼
+  version: "0.01"
+  author:
+    - 郑文浩 <shenmishajing@gmail.com>
+  description: |
+    dvorak 双拼方案
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 英文 ]
+  - name: emoji_suggestion
+    reset: 0
+    states: [ "🈚️️\uFE0E", "🈶️️\uFE0F" ]
+  - name: simplification
+    reset: 1
+    states: [ 繁, 简 ]
+  # - name: full_shape
+  #   reset: 0
+  #   states: [ 半角, 全角 ]
+  # - name: ascii_punct
+  #   reset: 0
+  #   states: [ 。，, ．， ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - script_translator
+  filters:
+    - simplifier
+    - simplifier@emoji_suggestion
+    - uniquifier
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba  # 呃，倒背字母表完全是個人喜好
+  delimiter: " '"  # 隔音符號用「'」；第一位的空白用來自動插入到音節邊界處
+  auto_select: true
+  auto_select_unique_candidate: true
+  algebra:  # 拼寫運算規則，這個纔是實現雙拼方案的重點。寫法有很多種，當然也可以把四百多個音節碼一條一條地列舉
+    - erase/^xx$/             # 碼表中有幾個拼音不明的字，編碼成xx了，消滅他
+    - derive/^([jqxy])u$/$1v/
+    - xform/^zh/O/            # 替換聲母鍵，用大寫以防與原有的字母混淆
+    - xform/^ch/A/
+    - xform/^sh/E/
+    - xform/^([aoe].*)$/U$1/  # 添上固定的零聲母u，先標記爲大寫 U
+    - xform/ei$/C/            # 替換韻母鍵
+    - xform/ian$/G/           # ※2
+    - xform/er$/U/            # 音節er現在變爲OR了
+    - xform/iu$/J/            # 
+    - xform/[iu]ang$/L/       # ※1
+    - xform/ing$/Z/
+    - xform/uo$/O/
+    - xform/uan$/M/           # ※3
+    - xform/i?ong$/P/
+    - xform/[iu]a$/W/
+    - xform/en$/N/
+    - xform/eng$/R/
+    - xform/ang$/S/           # 檢查一下在此之前是否已轉換過了帶介音的ang；好，※1處有了
+    - xform/an$/H/            # 如果※2、※3還無有出現在上文中，應該把他們提到本行之前
+    - xform/iao$/F/           # 對——像這樣讓iao提前出場
+    - xform/ao$/D/
+    - xform/in$/Q/       
+    - xform/uai$/Z/           # 讓uai提前出場
+    - xform/ai$/T/
+    - xform/ie$/K/
+    - xform/ou$/Y/
+    - xform/un$/B/
+    - xform/[uv]e$/X/
+    - xform/ui$/V/
+    - xlit/QWERTYUIOPASDFGHJKLZXCVBNM/qwertyuiopasdfghjklzxcvbnm/  # 最後把雙拼碼全部變小寫
+
+translator:
+  dictionary: luna_pinyin.extended    # 與【朙月拼音】共用詞典
+  prism: dvorak_double_pinyin    # prism 要以本輸入方案的名稱來命名，以免把朙月拼音的拼寫映射表覆蓋掉
+  enable_sentence: true
+  enable_user_dict: true      #开启调频
+  db_class: "tabledb"
+  preedit_format:             # 這段代碼用來將輸入的雙拼碼反轉爲全拼顯示；待見雙拼碼的可以把這段拿掉
+    - xform/uu/er/
+    - xform/u(\w)/0$1/        # 零聲母先改爲0，以方便後面的轉換
+    - xform/(\w)c/$1ei/       # 雙拼第二碼轉換爲韻母
+    - xform/(\w)n/$1en/       # 提前轉換雙拼碼 n 和 g，因爲轉換後的拼音裏就快要出現這兩個字母了，那時將難以分辨出雙拼碼
+    - xform/(\w)g/$1ian/      # 當然也可以採取事先將雙拼碼變爲大寫的辦法來與轉換過的拼音做區分，可誰讓我是高手呢
+    - xform/(\w)b/$1un/       
+    - xform/(\w)r/$1eng/      
+    - xform/(\w)j/$1iu/  # 對應多種韻母的雙拼碼，按搭配的聲母做區分（最好別用排除式如 [^o]r 容易出狀況）
+    - xform/([nljqx])l/$1iang/
+    - xform/(\w)l/$1uang/       # 上一行已經把對應到 iang 的雙拼碼 t 消滅，於是這裏不用再列舉相配的聲母
+    - xform/([bpmydtnljqx])z/$1ing/
+    - xform/(\w)z/$1uai/
+    - xform/([dtnlgkhaeorzcs])o/$1uo/
+    - xform/(\w)m/$1uan/
+    - xform/([jqx])p/$1iong/
+    - xform/(\w)p/$1ong/
+    - xform/(\w)q/$1in/
+    - xform/([gkhaeo])w/$1ua/
+    - xform/(\w)w/$1ia/
+    - xform/(\w)s/$1ang/
+    - xform/(\w)h/$1an/
+    - xform/(\w)d/$1ao/       # 默默檢查：雙拼碼 o 已經轉換過了
+    - xform/(\w)t/$1ai/
+    - xform/(\w)f/$1iao/
+    - xform/(\w)k/$1ie/
+    - xform/(\w)y/$1ou/
+    - xform/([nljqxy])v/$1ü/   # 這樣纔是漢語拼音 :-)
+    - xform/(\w)v/$1ui/
+    - xform/([nl])x/$1ve/
+    - xform/([jqxy])x/$1ue/
+    - "xform/(^|[ '])o/$1zh/"  # 復原聲母，音節開始處的雙拼字母o改寫爲zh；其他位置的才真正是o
+    - "xform/(^|[ '])a/$1ch/"
+    - "xform/(^|[ '])e/$1sh/"
+    - xform/0(\w)/$1/          # 好了，現在可以把零聲母拿掉啦
+
+# reverse_lookup:
+#   dictionary: stroke
+#   enable_completion: true
+#   prefix: "`"
+#   suffix: "'"
+#   tips: 〔筆畫〕
+#   preedit_format:
+#     - xlit/hspnz/一丨丿丶乙/
+#   comment_format:
+#     - xform/([nl])v/$1ü/
+
+# reverse_lookup:
+#   dictionary: wubixinshiji
+#   prefix: "`"
+#   tips: 〔五笔〕
+#   preedit_format:
+#     - "xlit|abcdefghijklmnopqrstuvwxy|工子又大月土王目水日口田山已火之金白木禾立女人幺言|"
+#   comment_format:
+#     - xform/([nl])v/$1ü/
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+  patterns:
+    reverse_lookup: "`[a-z]*'?$"
+
+emoji_suggestion:
+  opencc_config: emoji.json
+  option_name: emoji_suggestion
+  tips: all
