@@ -1,3 +1,4 @@
 /*.txt
+!custom_phrase.txt
 user.yaml
 installation.yaml

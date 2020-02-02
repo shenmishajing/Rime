@@ -49,6 +49,7 @@ engine:
   translators:
     - punct_translator
     - reverse_lookup_translator
+    - table_translator@custom_phrase
     - table_translator
   filters:
     - simplifier
@@ -120,6 +121,14 @@ reverse_lookup:
     - xform/([nl])v/$1ü/
     - xform/([nl])ue/$1üe/
     - xform/([jqxy])v/$1u/
+
+custom_phrase:
+    dictionary: ""
+    user_dict: custom_phrase
+    db_class: stabledb
+    enable_completion: true
+    enable_sentence: false
+    initial_quality: 1
 
 punctuator:
   import_preset: default

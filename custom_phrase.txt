@@ -1,0 +1,31 @@
+# Rime table
+# coding: utf-8
+#@/db_name  custom_phrase.txt
+#@/db_type	tabledb
+#
+# 用於【朙月拼音】系列輸入方案
+# 【小狼毫】0.9.21 以上
+#
+# 請將該文件以UTF-8編碼保存爲
+# Rime用戶文件夾/custom_phrase.txt
+#
+# 碼表各字段以製表符（Tab）分隔
+# 順序爲：文字、編碼、權重（決定重碼的次序、可選）
+#
+# 雖然文本碼表編輯較爲方便，但不適合導入大量條目
+#
+# no comment
+
+C   c   3
+Java	java	3
+Python	python	3
+Pytorch	pytorch	3
+iMac	imac	3
+Mac	mac	3
+MacOS	macos	3
+MacOS Catalina	macoscatalina	3
+MacBook	macbook	3
+MacBook Pro	macbookpro	3
+MacBook Air	macbookair	3
+shenmishajing@gmail.com email   3
+星际争霸2   starcraft   3

@@ -9,6 +9,8 @@ schema:
     - 郑文浩 <shenmishajing@gmail.com>
   description: |
     dvorak 双拼方案
+  dependencies:
+    - dvorak_wubi
 
 switches:
   - name: ascii_mode
@@ -45,6 +47,7 @@ engine:
     - fallback_segmentor
   translators:
     - punct_translator
+    - table_translator@custom_phrase
     - reverse_lookup_translator
     - script_translator
   filters:
@@ -132,6 +135,14 @@ translator:
     - "xform/(^|[ '])e/$1sh/"
     - xform/0(\w)/$1/          # 好了，現在可以把零聲母拿掉啦
 
+custom_phrase:
+  dictionary: ""
+  user_dict: custom_phrase
+  db_class: stabledb
+  enable_completion: true
+  enable_sentence: false
+  initial_quality: 1
+
 # reverse_lookup:
 #   dictionary: stroke
 #   enable_completion: true
@@ -143,14 +154,14 @@ translator:
 #   comment_format:
 #     - xform/([nl])v/$1ü/
 
-# reverse_lookup:
-#   dictionary: wubixinshiji
-#   prefix: "`"
-#   tips: 〔五笔〕
-#   preedit_format:
-#     - "xlit|abcdefghijklmnopqrstuvwxy|工子又大月土王目水日口田山已火之金白木禾立女人幺言|"
-#   comment_format:
-#     - xform/([nl])v/$1ü/
+reverse_lookup:
+  dictionary: dvorak_wubi
+  prefix: "`"
+  tips: 〔五笔〕
+  preedit_format:
+    - "xlit|iueoadhtnsxkjqpfgcrlbmwvz|王土大木工目日口田山禾白月人金言立水火之已子女又幺|"
+  comment_format:
+    - xform/([nl])v/$1ü/
 
 punctuator:
   import_preset: default
