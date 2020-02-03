@@ -22,6 +22,7 @@ JavaScript	javascript	3
 Python	python	3
 Pytorch	pytorch	3
 iMac	imac	3
+Ubuntu	ubuntu	3
 Mac	mac	3
 MacOS	macos	3
 MacOS Catalina	macoscatalina	3
