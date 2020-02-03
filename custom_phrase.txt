@@ -18,6 +18,7 @@
 
 C   c   3
 Java	java	3
+JavaScript	javascript	3
 Python	python	3
 Pytorch	pytorch	3
 iMac	imac	3
