@@ -99,15 +99,15 @@ translator:
   enable_sentence: true
   enable_user_dict: true      #开启调频
   db_class: "tabledb"
-  preedit_format:             # 這段代碼用來將輸入的雙拼碼反轉爲全拼顯示；待見雙拼碼的可以把這段拿掉
-    - xform/uu/er/
-    - xform/u(\w)/0$1/        # 零聲母先改爲0，以方便後面的轉換
-    - xform/(\w)c/$1ei/       # 雙拼第二碼轉換爲韻母
-    - xform/(\w)n/$1en/       # 提前轉換雙拼碼 n 和 g，因爲轉換後的拼音裏就快要出現這兩個字母了，那時將難以分辨出雙拼碼
-    - xform/(\w)g/$1ian/      # 當然也可以採取事先將雙拼碼變爲大寫的辦法來與轉換過的拼音做區分，可誰讓我是高手呢
+  preedit_format:               # 這段代碼用來將輸入的雙拼碼反轉爲全拼顯示；待見雙拼碼的可以把這段拿掉
+    - xform/uu/00/              # 两个零聲母先改爲两个0，以方便後面的轉換
+    - xform/u(\w)/0$1/          # 零聲母先改爲0，以方便後面的轉換
+    - xform/(\w)c/$1ei/         # 雙拼第二碼轉換爲韻母
+    - xform/(\w)n/$1en/         # 提前轉換雙拼碼 n 和 g，因爲轉換後的拼音裏就快要出現這兩個字母了，那時將難以分辨出雙拼碼
+    - xform/(\w)g/$1ian/        # 當然也可以採取事先將雙拼碼變爲大寫的辦法來與轉換過的拼音做區分，可誰讓我是高手呢
     - xform/(\w)b/$1un/       
     - xform/(\w)r/$1eng/      
-    - xform/(\w)j/$1iu/  # 對應多種韻母的雙拼碼，按搭配的聲母做區分（最好別用排除式如 [^o]r 容易出狀況）
+    - xform/(\w)j/$1iu/         # 對應多種韻母的雙拼碼，按搭配的聲母做區分（最好別用排除式如 [^o]r 容易出狀況）
     - xform/([nljqx])l/$1iang/
     - xform/(\w)l/$1uang/       # 上一行已經把對應到 iang 的雙拼碼 t 消滅，於是這裏不用再列舉相配的聲母
     - xform/([bpmydtnljqx])z/$1ing/
@@ -121,19 +121,20 @@ translator:
     - xform/(\w)w/$1ia/
     - xform/(\w)s/$1ang/
     - xform/(\w)h/$1an/
-    - xform/(\w)d/$1ao/       # 默默檢查：雙拼碼 o 已經轉換過了
+    - xform/(\w)d/$1ao/         # 默默檢查：雙拼碼 o 已經轉換過了
     - xform/(\w)t/$1ai/
     - xform/(\w)f/$1iao/
     - xform/(\w)k/$1ie/
     - xform/(\w)y/$1ou/
-    - xform/([nljqxy])v/$1ü/   # 這樣纔是漢語拼音 :-)
+    - xform/([nljqxy])v/$1ü/    # 這樣纔是漢語拼音 :-)
     - xform/(\w)v/$1ui/
     - xform/([nl])x/$1ve/
     - xform/([jqxy])x/$1ue/
-    - "xform/(^|[ '])o/$1zh/"  # 復原聲母，音節開始處的雙拼字母o改寫爲zh；其他位置的才真正是o
+    - "xform/(^|[ '])o/$1zh/"   # 復原聲母，音節開始處的雙拼字母o改寫爲zh；其他位置的才真正是o
     - "xform/(^|[ '])a/$1ch/"
     - "xform/(^|[ '])e/$1sh/"
-    - xform/0(\w)/$1/          # 好了，現在可以把零聲母拿掉啦
+    - xform/00/er/              # 好了，現在可以把零聲母拿掉啦
+    - xform/0(\w)/$1/
 
 custom_phrase:
   dictionary: ""
