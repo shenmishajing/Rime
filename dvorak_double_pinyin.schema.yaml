@@ -98,7 +98,7 @@ translator:
   prism: dvorak_double_pinyin    # prism 要以本輸入方案的名稱來命名，以免把朙月拼音的拼寫映射表覆蓋掉
   enable_sentence: true
   enable_user_dict: true      #开启调频
-  db_class: "tabledb"
+  db_class: "userdb"
   preedit_format:               # 這段代碼用來將輸入的雙拼碼反轉爲全拼顯示；待見雙拼碼的可以把這段拿掉
     - xform/uu/00/              # 两个零聲母先改爲两个0，以方便後面的轉換
     - xform/u(\w)/0$1/          # 零聲母先改爲0，以方便後面的轉換

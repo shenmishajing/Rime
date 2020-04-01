@@ -1,4 +1,6 @@
 /*.txt
+/build
+/*.userdb
 !custom_phrase.txt
 user.yaml
 installation.yaml
