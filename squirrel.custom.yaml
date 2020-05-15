@@ -52,4 +52,8 @@ patch:
       no_inline: true
     com.jetbrains.pycharm:
         ascii_mode: true
+    com.jetbrains.intellij:
+        ascii_mode: true
+    com.jetbrains.Clion:
+        ascii_mode: true
 
