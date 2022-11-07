@@ -43,7 +43,7 @@ patch:
   #     border_color_width: 0
 
   app_options:
-    com.microsoft.VSCodeInsiders:
+    com.microsoft.VSCode:
       ascii_mode: true
     com.runningwithcrayons.Alfred:
       ascii_mode: true
