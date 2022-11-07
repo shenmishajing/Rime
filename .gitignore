@@ -1,6 +1,7 @@
 /*.txt
 /build
 /*.userdb
+*.dict.yaml
 /tools/dicts/*
 !/tools/dicts/original
 !custom_phrase.txt
