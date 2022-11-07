@@ -51,8 +51,8 @@ engine:
     - reverse_lookup_translator
     - script_translator
   filters:
-    - simplifier
-    - simplifier@emoji_suggestion
+    # - simplifier
+    # - simplifier@emoji_suggestion
     - uniquifier
 
 speller:
