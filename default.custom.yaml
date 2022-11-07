@@ -2,17 +2,18 @@ patch:
   menu:
     page_size: 3
   schema_list:
-    - schema: dvorak_double_pinyin        # dvorak 双拼
-    - schema: dvorak_wubi                 # dvorak 五笔
+    - schema: dvorak_double_pinyin # dvorak 双拼
+    - schema: dvorak_wubi # dvorak 五笔
   switcher:
     hotkeys:
       - Control+Shift+space
   key_binder/bindings:
     - { when: composing, accept: Tab, send: Page_Down }
     - { when: composing, accept: Shift+Tab, send: Page_Up }
-    - { accept: semicolon, send: 2, when: has_menu }    #候选2 用分号
-    - { accept: apostrophe, send: 3, when: has_menu }   #候选3 用单引号
-
+    - { when: composing, accept: period, send: Page_Down }
+    - { when: composing, accept: comma, send: Page_Up }
+    - { when: has_menu, accept: semicolon, send: 2 } #候选2 用分号
+    - { when: has_menu, accept: apostrophe, send: 3 } #候选3 用单引号
 
   ascii_composer/good_old_caps_lock: true # capslock 键切换英文并输出小写
   ascii_composer/switch_key:
