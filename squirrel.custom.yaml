@@ -43,17 +43,12 @@ patch:
   #     border_color_width: 0
 
   app_options:
-    com.microsoft.VSCode:
+    com.apple.Spotlight:
       ascii_mode: true
-    com.runningwithcrayons.Alfred:
+    com.microsoft.VSCode:
       ascii_mode: true
     com.googlecode.iterm2:
       ascii_mode: true
-      no_inline: true
     com.jetbrains.pycharm:
-        ascii_mode: true
-    com.jetbrains.intellij:
-        ascii_mode: true
-    com.jetbrains.Clion:
         ascii_mode: true
 
