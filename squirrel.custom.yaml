@@ -1,19 +1,19 @@
 patch:
   show_notifications_when: never # 状态通知，适当，也可设为全开（always）全关（never）
 
-#   style:
-#     color_scheme: mojave_dark
-    # horizontal: true
-    # inline_preedit: true
-    # candidate_format: "%c\u2005%@\u2005" # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间。
-    # font_point: 16 # 候选文字大小
-    # label_font_point: 14 # 候选编号大小
-    # corner_radius: 5 # 候选条圆角
-    # hilited_corner_radius: 3 # 高亮圆角
-    # border_height: 0 # 窗口边界高度，大于圆角半径才生效
-    # border_width: 0 # 窗口边界宽度，大于圆角半径才生效
+  #   style:
+  #     color_scheme: mojave_dark
+  # horizontal: true
+  # inline_preedit: true
+  # candidate_format: "%c\u2005%@\u2005" # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间。
+  # font_point: 16 # 候选文字大小
+  # label_font_point: 14 # 候选编号大小
+  # corner_radius: 5 # 候选条圆角
+  # hilited_corner_radius: 3 # 高亮圆角
+  # border_height: 0 # 窗口边界高度，大于圆角半径才生效
+  # border_width: 0 # 窗口边界宽度，大于圆角半径才生效
 
-  style/color_scheme: mojave_dark             # 方案命名，不能有空格
+  style/color_scheme: mojave_dark # 方案命名，不能有空格
   # preset_color_schemes:
   #   system_blue:
   #     author: "scomper <scomper@gmail.com>"   # 作者信息
@@ -45,10 +45,11 @@ patch:
   app_options:
     com.apple.Spotlight:
       ascii_mode: true
+    com.runningwithcrayons.Alfred:
+      ascii_mode: true
     com.microsoft.VSCode:
       ascii_mode: true
     com.googlecode.iterm2:
       ascii_mode: true
     com.jetbrains.pycharm:
-        ascii_mode: true
-
+      ascii_mode: true
