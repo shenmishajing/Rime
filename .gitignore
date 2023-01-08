@@ -1,8 +1,5 @@
-/*.txt
 /build
 /*.userdb
-/*.dict.yaml
-!/dvorak_double_pinyin.dict.yaml
 !custom_phrase.txt
 user.yaml
 installation.yaml
