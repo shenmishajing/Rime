@@ -1,0 +1,24 @@
+name: dvorak_double_pinyin
+version: "1"
+sort: by_weight
+# use_preset_vocabulary: false
+import_tables:
+    - dicts/clover/clover.base
+    - dicts/clover/clover.phrase
+    - dicts/luna_pinyin/pinyin_simp
+    - dicts/clover/THUOCL_animal
+    - dicts/clover/THUOCL_caijing
+    - dicts/clover/THUOCL_car
+    - dicts/clover/THUOCL_chengyu
+    - dicts/clover/THUOCL_diming
+    - dicts/clover/THUOCL_food
+    - dicts/clover/THUOCL_IT
+    - dicts/clover/THUOCL_law
+    - dicts/clover/THUOCL_lishimingren
+    - dicts/clover/THUOCL_medical
+    - dicts/clover/THUOCL_poem
+    - dicts/clover/sogou_new_words
+    - dicts/luna_pinyin/luna_pinyin.sogou
+    - dicts/luna_pinyin/luna_pinyin.base
+    - dicts/luna_pinyin/luna_pinyin.hanyu
+    - dicts/luna_pinyin/luna_pinyin.poetry
